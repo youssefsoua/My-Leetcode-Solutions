@@ -15,7 +15,7 @@ function numIslands(grid: string[][]): number {
                         const [v,w] = direction
                         const newX = v+x
                         const newY = w+y
-                        if(newX>=0 && newX<m && newY>=0 && newY<n && grid[newX][newY] ==="1") stack.push([newX,newY])
+                        if(newX>=0 && newX<m && newY>=0 && newY<n && grid[newX][newY] === "1") stack.push([newX,newY])
                     }
                 }
                 count++
