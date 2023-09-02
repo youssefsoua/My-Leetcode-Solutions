@@ -1,32 +1,26 @@
 function numIslands(grid: string[][]): number {
   const m = grid.length;
-  const n = grid[0].length;
-  const visited = new Set<string>();
+  const n = m > 0 ? grid[0].length : 0;
   let count = 0;
-  const directions = [[1, 0], [-1, 0], [0, 1], [0, -1]];
-
-  function isValid(x: number, y: number): boolean {
-    return x >= 0 && x < m && y >= 0 && y < n;
-  }
 
   function dfs(x: number, y: number): void {
-    if (!isValid(x, y) || grid[x][y] === '0' || visited.has(`${x},${y}`)) {
+    if (x < 0 || x >= m || y < 0 || y >= n || grid[x][y] === '0') {
       return;
     }
 
-    visited.add(`${x},${y}`);
-    
-    for (const [dx, dy] of directions) {
-      const newX = x + dx;
-      const newY = y + dy;
-      dfs(newX, newY);
-    }
+    grid[x][y] = '0'; // Mark the current cell as visited
+
+    // Recursively visit adjacent land cells
+    dfs(x + 1, y);
+    dfs(x - 1, y);
+    dfs(x, y + 1);
+    dfs(x, y - 1);
   }
 
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
-      if (grid[i][j] === '1' && !visited.has(`${i},${j}`)) {
-        dfs(i, j);
+      if (grid[i][j] === '1') {
+        dfs(i, j); // Start DFS from a land cell
         count++;
       }
     }
