@@ -1,20 +1,24 @@
 function coinChange(coins: number[], amount: number): number {
-    const cache = new Map()
+    const memo = new Map<number, number>();
 
-    const dfs = (amount:number) =>{
-        if(amount === 0) return 0
-        if(cache.has(amount)) return cache.get(amount)
-        let combinations = Infinity
+    const dp = (amount: number): number =>{
+        if(amount === 0) return 0;
+        if(memo.has(amount)) return memo.get(amount);
+
+        let combinations = Infinity;
+
         for(const coin of coins){
-            const newAmount = amount-coin
-            if(newAmount>=0){
-                combinations = Math.min(combinations, dfs(newAmount))
+            const newAmount = amount - coin;
+            if(newAmount >= 0){
+                combinations = Math.min(combinations, dp(newAmount) + 1);
             }       
         }
-        cache.set(amount, combinations + 1)
-        return combinations + 1
-    }
-    const result = dfs(amount)
 
-    return result === Infinity ? -1: result
+        memo.set(amount, combinations);
+        return combinations;
+    }
+
+    const result = dp(amount);
+
+    return result === Infinity ? -1 : result;
 };
