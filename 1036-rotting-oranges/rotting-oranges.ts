@@ -1,37 +1,55 @@
 function orangesRotting(grid: number[][]): number {
-    const m = grid.length
-    const n = grid[0].length
-    let oranges = 0
-    let elapsedTime = 0
-    let rottenOranges = []
+    const m: number = grid.length;
+    const n: number = grid[0].length;
+    let oranges: number = 0;
+    let elapsedTime: number = 0;
+    const rottenOranges: [number, number][] = [];
 
-    for(let i = 0; i<m; i++){
-        for(let j = 0; j<n; j++){
-            if(grid[i][j] === 1) oranges++
-            if(grid[i][j] === 2) rottenOranges.push([i,j]) 
+    for (let i: number = 0; i < m; i++) {
+        for (let j: number = 0; j < n; j++) {
+            if (grid[i][j] === 1) oranges++;
+            if (grid[i][j] === 2) rottenOranges.push([i, j]);
         }
     }
 
-    if(!oranges) return 0
+    if (!oranges) return 0;
 
-    const directions = [[1,0],[-1,0],[0,1],[0,-1]]
+    const directions: [number, number][] = [
+        [1, 0],
+        [-1, 0],
+        [0, 1],
+        [0, -1],
+    ];
 
-    while(rottenOranges.length){
-        let currentNodes = rottenOranges.length
-        while(currentNodes){
-            const [i,j] = rottenOranges.shift()
-            currentNodes--
-            for(const direction of directions){
-                const [x,y] = direction
-                if(i+x>=0 && i+x<m && j+y>=0 && j+y<n && grid[i+x][j+y] === 1){
-                    rottenOranges.push([i+x,j+y])
-                    grid[i+x][j+y] = 2
-                    oranges--
+    while (rottenOranges.length) {
+        let currentNodes: number = rottenOranges.length;
+        while (currentNodes) {
+
+            const [i, j]: [number, number] = rottenOranges.shift();
+            currentNodes--;
+
+            for (const direction of directions) {
+
+                const [x, y]: [number, number] = direction;
+                const newX: number = i + x;
+                const newY: number = j + y;
+
+                if (
+                    newX >= 0 &&
+                    newX < m &&
+                    newY >= 0 &&
+                    newY < n &&
+                    grid[newX][newY] === 1
+                ) {
+                    rottenOranges.push([newX, newY]);
+                    grid[newX][newY] = 2;
+                    oranges--;
                 }
             }
         }
-        elapsedTime++
+        
+        elapsedTime++;
     }
 
-    return oranges ? -1 : elapsedTime - 1
-};
+    return oranges ? -1 : elapsedTime - 1;
+}
