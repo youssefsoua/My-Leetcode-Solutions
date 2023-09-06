@@ -23,7 +23,6 @@ function sortColors(nums: number[]): void {
     }
 }
 
-
 /**
 function sortColors(nums: number[]): void {
     const n: number = nums.length;
