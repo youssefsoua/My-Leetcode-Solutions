@@ -14,3 +14,20 @@ function subsets(nums: number[]): number[][] {
 
     return result;
 }
+
+
+/**
+function subsets(nums: number[]): number[][] {
+    const n = nums.length;
+    const result: number[][] = [[]];
+
+    for (let i = 0; i < n; i++) {
+        const c = result.length;
+        for (let j = 0; j < c; j++) {
+            const e = [...result[j], nums[i]];
+            result.push(e);
+        }
+    }
+    return result;
+}
+ */
