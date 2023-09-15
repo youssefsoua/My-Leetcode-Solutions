@@ -10,7 +10,9 @@ function dailyTemperatures(temperatures: number[]): number[] {
         ) {
             stack.pop();
         }
+
         result[i] = stack.length ? stack[stack.length - 1] - i : 0;
+
         stack.push(i);
     }
 
