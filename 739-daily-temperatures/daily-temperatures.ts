@@ -1,8 +1,9 @@
 function dailyTemperatures(temperatures: number[]): number[] {
+    const n: number = temperatures.length
     const stack: number[] = [];
-    const result: number[] = [];
+    const result: number[] = new Array(n).fill(0); ;
 
-    for (let i = temperatures.length - 1; i >= 0; i--) {
+    for (let i = n - 1; i >= 0; i--) {
         while (
             stack.length &&
             temperatures[i] >= temperatures[stack[stack.length - 1]]
