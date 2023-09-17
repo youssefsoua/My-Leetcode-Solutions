@@ -12,30 +12,53 @@
  * }
  */
 
+
+
+
 function isSubtree(root: TreeNode | null, subRoot: TreeNode | null): boolean {
-    const stack: TreeNode[] = [root];
+    const isSame = (tree1: TreeNode | null, tree2: TreeNode | null): boolean => {
+        if (!tree1 && !tree2) return true;
+        if (!tree1 || !tree2 || tree1.val !== tree2.val) return false;
+        
+        return isSame(tree1.left, tree2.left) && isSame(tree1.right, tree2.right);
+    };
 
-    while (stack.length) {
-        const current = stack.pop();
+    const dfs = (node: TreeNode | null): boolean => {
+        if (!node) return false;
+        if (isSame(node, subRoot)) return true;
 
-        if (current?.val === subRoot.val) {
-            const isSame: boolean = isSameTree(current, subRoot);
-            if (isSame) return true;
-        }
+        return dfs(node.left) || dfs(node.right);
+    };
 
-        if (current?.left) stack.push(current.left);
-        if (current?.right) stack.push(current.right);
-    }
-
-    return false;
+    return dfs(root);
 }
 
-function isSameTree(tree1: TreeNode | null, tree2: TreeNode | null): boolean {
-    if (!tree1 && !tree2) return true;
-    if (!tree1 || !tree2 || tree1.val !== tree2.val) return false;
 
-    const left = isSameTree(tree1.left, tree2.left);
-    const right = isSameTree(tree1.right, tree2.right);
 
-    return left && right;
-}
+// function isSubtree(root: TreeNode | null, subRoot: TreeNode | null): boolean {
+//     const queue: TreeNode[] = [root];
+
+//     while (queue.length) {
+//         const current = queue.shift();
+
+//         if (current?.val === subRoot.val) {
+//             const isSame: boolean = isSameTree(current, subRoot);
+//             if (isSame) return true;
+//         }
+
+//         if (current?.left) queue.push(current.left);
+//         if (current?.right) queue.push(current.right);
+//     }
+
+//     return false;
+// }
+
+// function isSameTree(tree1: TreeNode | null, tree2: TreeNode | null): boolean {
+//     if (!tree1 && !tree2) return true;
+//     if (!tree1 || !tree2 || tree1.val !== tree2.val) return false;
+
+//     const left = isSameTree(tree1.left, tree2.left);
+//     const right = isSameTree(tree1.right, tree2.right);
+
+//     return left && right;
+// }
