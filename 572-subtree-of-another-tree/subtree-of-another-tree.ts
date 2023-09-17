@@ -13,18 +13,18 @@
  */
 
 function isSubtree(root: TreeNode | null, subRoot: TreeNode | null): boolean {
-    const queue: TreeNode[] = [root];
+    const stack: TreeNode[] = [root];
 
-    while (queue.length) {
-        const current = queue.shift();
+    while (stack.length) {
+        const current = stack.pop();
 
         if (current?.val === subRoot.val) {
             const isSame: boolean = isSameTree(current, subRoot);
             if (isSame) return true;
         }
 
-        if (current?.left) queue.push(current.left);
-        if (current?.right) queue.push(current.right);
+        if (current?.left) stack.push(current.left);
+        if (current?.right) stack.push(current.right);
     }
 
     return false;
