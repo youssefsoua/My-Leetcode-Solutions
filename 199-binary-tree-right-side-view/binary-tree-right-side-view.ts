@@ -34,6 +34,7 @@ function rightSideView(root: TreeNode | null): number[] {
 }
 
 
+//My first solution:
 
 // function rightSideView(root: TreeNode | null): number[] {
 //     const result: number[] = [];
