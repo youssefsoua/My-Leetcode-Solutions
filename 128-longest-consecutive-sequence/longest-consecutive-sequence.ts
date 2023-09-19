@@ -6,10 +6,12 @@ function longestConsecutive(nums: number[]): number {
     if (!set.has(num - 1)) {
       let currentSeq: number = 1;
       let currentNum: number = num + 1;
+
       while (set.has(currentNum)) {
         currentSeq++;
         currentNum++;
       }
+      
       max = Math.max(max, currentSeq);
     }
   }
