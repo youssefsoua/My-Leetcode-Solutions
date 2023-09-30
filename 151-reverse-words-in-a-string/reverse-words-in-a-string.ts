@@ -1,4 +1,14 @@
 function reverseWords(s: string): string {
+    return s
+        .split(" ")
+        .filter(word => word.trim() !== "")
+        .reverse()
+        .join(" ");
+}
+
+
+/*
+function reverseWords(s: string): string {
     const words: string[] = s.split(" ");
     let result: string = "";
 
@@ -9,3 +19,4 @@ function reverseWords(s: string): string {
 
     return result.trim();
 }
+*/
