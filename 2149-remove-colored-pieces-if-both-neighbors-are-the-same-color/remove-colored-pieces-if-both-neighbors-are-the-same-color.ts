@@ -1,17 +1,46 @@
 function winnerOfGame(colors: string): boolean {
   let aliceCount = 0;
   let bobCount = 0;
+  
+  let consecutiveA = 0;
+  let consecutiveB = 0;
 
-  for (let i = 0; i < colors.length - 2; i++) {
-    if (colors[i] === 'A' && colors[i + 1] === 'A' && colors[i + 2] === 'A') {
+  for (let i = 0; i < colors.length; i++) {
+    if (colors[i] === 'A') {
+      consecutiveA++;
+      consecutiveB = 0; // Reset consecutiveB
+    } else if (colors[i] === 'B') {
+      consecutiveB++;
+      consecutiveA = 0; // Reset consecutiveA
+    }
+
+    if (consecutiveA >= 3) {
       aliceCount++;
-    } else if (colors[i] === 'B' && colors[i + 1] === 'B' && colors[i + 2] === 'B') {
+    }
+
+    if (consecutiveB >= 3) {
       bobCount++;
     }
   }
 
   return aliceCount > bobCount;
 }
+
+
+// function winnerOfGame(colors: string): boolean {
+//   let aliceCount = 0;
+//   let bobCount = 0;
+
+//   for (let i = 0; i < colors.length - 2; i++) {
+//     if (colors[i] === 'A' && colors[i + 1] === 'A' && colors[i + 2] === 'A') {
+//       aliceCount++;
+//     } else if (colors[i] === 'B' && colors[i + 1] === 'B' && colors[i + 2] === 'B') {
+//       bobCount++;
+//     }
+//   }
+
+//   return aliceCount > bobCount;
+// }
 
 
 // function winnerOfGame(colors: string): boolean {
