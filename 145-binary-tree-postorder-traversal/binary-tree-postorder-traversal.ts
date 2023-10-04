@@ -13,12 +13,12 @@
  */
 
 function postorderTraversal(root: TreeNode | null, result: number[] = []): number[] {
-    if(!root) return result
+    if(!root) return result;
 
-    postorderTraversal(root.left, result)
-    postorderTraversal(root.right, result)
+    postorderTraversal(root.left, result);
+    postorderTraversal(root.right, result);
 
-    result.push(root.val)
+    result.push(root.val);
 
-    return result
+    return result;
 };
