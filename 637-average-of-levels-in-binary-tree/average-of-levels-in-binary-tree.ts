@@ -13,22 +13,22 @@
  */
 
 function averageOfLevels(root: TreeNode | null): number[] {
-    const levels = []
-    const levelsNodes = (root: TreeNode | null, index: number): void =>{
-        if(root){
-            if(levels[index])levels[index].push(root.val)
-            else levels[index] = [root.val]
-            levelsNodes(root.left, index + 1)
-            levelsNodes(root.right, index + 1)
+    const levels = [];
+    const levelsNodes = (root: TreeNode | null, index: number): void => {
+        if (root) {
+            if (levels[index]) levels[index].push(root.val);
+            else levels[index] = [root.val];
+            levelsNodes(root.left, index + 1);
+            levelsNodes(root.right, index + 1);
         }
+    };
+    levelsNodes(root, 0);
+
+    const result: number[] = [];
+
+    for (const level of levels) {
+        result.push(level.reduce((s, e) => s + e, 0) / level.length);
     }
-    levelsNodes(root,0)
 
-    const result: number[] = []
-
-    for(const level of levels){
-        result.push(level.reduce((s,e)=>s+e,0)/level.length)
-    }
-
-    return result
-};
+    return result;
+}
