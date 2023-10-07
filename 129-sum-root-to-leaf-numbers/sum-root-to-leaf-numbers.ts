@@ -30,7 +30,6 @@ function sumNumbers(root: TreeNode | null): number {
     return dfs(root, 0);
 }
 
-
 // function sumNumbers(root: TreeNode | null): number {
 //     const nums: number[] = [];
 
