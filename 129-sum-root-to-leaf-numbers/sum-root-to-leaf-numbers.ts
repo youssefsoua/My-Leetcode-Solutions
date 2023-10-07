@@ -13,18 +13,37 @@
  */
 
 function sumNumbers(root: TreeNode | null): number {
-    const nums: number[] = [];
-
-    const getNumbers = (root: TreeNode | null, num: string = ""): void => {
-        if (root) {
-            num += root.val;
-            if (!root.left && !root.right) nums.push(+num);
-            
-            getNumbers(root.left, num);
-            getNumbers(root.right, num);
+    const dfs = (node: TreeNode | null, currentSum: number): number => {
+        if (!node) {
+            return 0;
         }
-    };
-    getNumbers(root);
 
-    return nums.reduce((s, e) => s + e, 0);
+        const newSum = currentSum * 10 + node.val;
+
+        if (!node.left && !node.right) {
+            return newSum;
+        }
+
+        return dfs(node.left, newSum) + dfs(node.right, newSum);
+    };
+
+    return dfs(root, 0);
 }
+
+
+// function sumNumbers(root: TreeNode | null): number {
+//     const nums: number[] = [];
+
+//     const getNumbers = (root: TreeNode | null, num: string = ""): void => {
+//         if (root) {
+//             num += root.val;
+//             if (!root.left && !root.right) nums.push(+num);
+
+//             getNumbers(root.left, num);
+//             getNumbers(root.right, num);
+//         }
+//     };
+//     getNumbers(root);
+
+//     return nums.reduce((s, e) => s + e, 0);
+// }
