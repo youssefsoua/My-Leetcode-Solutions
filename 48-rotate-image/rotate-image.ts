@@ -1,6 +1,24 @@
 /**
  Do not return anything, modify matrix in-place instead.
  */
+
+function rotate(matrix: number[][]): void {
+    const n = matrix.length;
+
+    // Transpose the matrix
+    for (let i = 0; i < n; i++) {
+        for (let j = i; j < n; j++) {
+            [matrix[i][j], matrix[j][i]] = [matrix[j][i], matrix[i][j]];
+        }
+    }
+
+    // Reverse the rows
+    for (let i = 0; i < n; i++) {
+        matrix[i].reverse();
+    }
+}
+
+/**
 function rotate(matrix: number[][]): void {
     const n = matrix.length;
 
@@ -23,3 +41,4 @@ function rotate(matrix: number[][]): void {
         }
     }
 }
+ */
