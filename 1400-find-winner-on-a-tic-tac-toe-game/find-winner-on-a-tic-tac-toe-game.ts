@@ -1,4 +1,46 @@
 function tictactoe(moves: number[][]): string {
+    const players = [[], []]; 
+    let currentPlayer = 0; // 0 for player A, 1 for player B
+
+    // Define a function to check for a win
+    const checkWin = (playerMoves: number[][]) => {
+        const rows = new Array(3).fill(0);
+        const cols = new Array(3).fill(0);
+        let diag1 = 0;
+        let diag2 = 0;
+
+        for (const move of playerMoves) {
+            const [row, col] = move;
+            rows[row]++;
+            cols[col]++;
+            if (row === col) diag1++;
+            if (row + col === 2) diag2++;
+        }
+
+        for (let i = 0; i < 3; i++) {
+            if (rows[i] === 3 || cols[i] === 3) return true;
+        }
+
+        if (diag1 === 3 || diag2 === 3) return true;
+
+        return false;
+    };
+
+    for (const move of moves) {
+        players[currentPlayer].push(move);
+        if (checkWin(players[currentPlayer])) {
+            return currentPlayer === 0 ? "A" : "B";
+        }
+        currentPlayer = 1 - currentPlayer; // Switch players
+    }
+
+    if (moves.length < 9) return "Pending";
+    return "Draw";
+}
+
+
+/*
+function tictactoe(moves: number[][]): string {
     const players = new Map<string, number[][]>();
     players.set("A", []);
     players.set("B", []);
@@ -62,3 +104,4 @@ const checkNegativeDiag = (moves: number[][], n: number): boolean => {
     }
     return count === n;
 };
+*/
