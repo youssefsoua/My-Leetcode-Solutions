@@ -9,7 +9,7 @@ function getWinner(arr: number[], k: number): number {
         max = Math.max(max,e)
     }
 
-    if(k>n*2) return max
+    if(k>n) return max
 
     while(true){
         let tempI = i%n
