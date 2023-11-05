@@ -5,21 +5,17 @@ function getWinner(arr: number[], k: number): number {
     const counter = new Map();
     let max = 0;
 
-    for (const e of arr) {
-        counter.set(e, 0);
-        max = Math.max(max, e);
-    }
-
-    if (k > n) return max;
-
-    while (true) {
-        if (arr[i] === max || arr[j] === max) return max;
-        if (arr[i] > arr[j]) {
+    while (i<n && j<n) {
+        max = Math.max(arr[i], arr[j])
+         if (arr[i] > arr[j]) {
             const count = counter.get(arr[i]);
-            if (count + 1 === k) {
-                return arr[i];
-            } else {
+            if(count === undefined) counter.set(arr[i],1)
+            else {
                 counter.set(arr[i], count + 1);
+            }
+
+            if (counter.get(arr[i]) === k) {
+                return arr[i];
             }
 
             if (i > j) {
@@ -29,10 +25,12 @@ function getWinner(arr: number[], k: number): number {
             }
         } else {
             const count = counter.get(arr[j]);
-            if (count + 1 === k) {
-                return arr[j];
-            } else {
+            if(count === undefined) counter.set(arr[j],1)
+            else {
                 counter.set(arr[j], count + 1);
+            }
+            if (counter.get(arr[j]) === k) {
+                return arr[j];
             }
 
             if (j > i) {
@@ -42,4 +40,5 @@ function getWinner(arr: number[], k: number): number {
             }
         }
     }
+    return max
 }
