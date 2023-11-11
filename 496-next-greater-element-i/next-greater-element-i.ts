@@ -13,8 +13,10 @@ function nextGreaterElement(nums1: number[], nums2: number[]): number[] {
 
         stack.push(i);
     }
+
     for (const num of nums1) {
         res.push(map.get(num));
     }
+    
     return res;
 }
