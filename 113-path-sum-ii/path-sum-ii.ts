@@ -16,23 +16,25 @@ function pathSum(root: TreeNode | null, targetSum: number): number[][] {
     const result: number[][] = [];
 
     const findPaths = (
-        root: TreeNode | null,
-        targetSum: number,
-        route: number[] = [],
+        node: TreeNode | null,
+        currentPath: number[],
+        remainingSum: number
     ): void => {
-        if (root) {
-            const newRoute = [...route, root.val];
-            const newTargetSum = targetSum - root.val;
+        if (!node) return;
 
-            if (!root.left && !root.right && !newTargetSum)
-                result.push(newRoute);
+        const newPath = [...currentPath, node.val];
+        const newRemainingSum = remainingSum - node.val;
 
-            findPaths(root.left, newTargetSum, newRoute);
-            findPaths(root.right, newTargetSum, newRoute);
+        if (!node.left && !node.right && newRemainingSum === 0) {
+            result.push(newPath);
+            return;
         }
+
+        findPaths(node.left, newPath, newRemainingSum);
+        findPaths(node.right, newPath, newRemainingSum);
     };
 
-    findPaths(root, targetSum);
+    findPaths(root, [], targetSum);
     
     return result;
 }
