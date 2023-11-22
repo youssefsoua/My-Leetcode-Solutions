@@ -19,5 +19,6 @@ function numUniqueEmails(emails: string[]): number {
         parts[0] = local;
         unique.add(parts.join("@"));
     }
+
     return unique.size;
 }
