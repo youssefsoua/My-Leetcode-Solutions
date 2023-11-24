@@ -1,38 +1,47 @@
 function minWindow(s: string, t: string): string {
-    const targetCharCounter = new Map<string, number>();
-    const counter = new Map<string, number>();
+    const targetCharCount = new Map<string, number>();
+    const currentWindowCount = new Map<string, number>();
     let matchedCount: number = 0;
-    let left: number = 0;
+    let leftPointer: number = 0;
     let firstIndex: number = 0;
     let lastIndex: number = Infinity;
 
+    // Populate the target character count map
     for (const char of t) {
-        targetCharCounter.set(char, (targetCharCounter.get(char) || 0) + 1);
+        targetCharCount.set(char, (targetCharCount.get(char) || 0) + 1);
     }
 
-    for (let right = 0; right < s.length; right++) {
-        if (targetCharCounter.has(s[right])) {
-            const currentCharCount: number = (counter.get(s[right]) || 0) + 1;
-            counter.set(s[right], currentCharCount);
+    for (let rightPointer = 0; rightPointer < s.length; rightPointer++) {
+        // Update current window character count
+        if (targetCharCount.has(s[rightPointer])) {
+            const currentCharCount: number = (currentWindowCount.get(s[rightPointer]) || 0) + 1;
+            currentWindowCount.set(s[rightPointer], currentCharCount);
 
-            if (targetCharCounter.get(s[right]) >= currentCharCount)
+            // Check if the character is fully matched
+            if (targetCharCount.get(s[rightPointer]) >= currentCharCount) {
                 matchedCount++;
+            }
         }
 
+        // Try to minimize the window by moving the left pointer
         while (matchedCount === t.length) {
-            let current = counter.get(s[left]);
+            let currentCount = currentWindowCount.get(s[leftPointer]);
 
-            if (current) {
-                if (current === targetCharCounter.get(s[left])) {
+            if (currentCount) {
+                // Update matched count and window indices
+                if (currentCount === targetCharCount.get(s[leftPointer])) {
                     matchedCount--;
-                    if (right - left < lastIndex - firstIndex) {
-                        firstIndex = left;
-                        lastIndex = right;
+                    if (rightPointer - leftPointer < lastIndex - firstIndex) {
+                        firstIndex = leftPointer;
+                        lastIndex = rightPointer;
                     }
                 }
-                counter.set(s[left], current - 1);
+
+                // Move the left pointer
+                currentWindowCount.set(s[leftPointer], currentCount - 1);
             }
-            left++;
+
+            leftPointer++;
         }
     }
 
