@@ -6,10 +6,7 @@ function getSumAbsoluteDifferences(nums: number[]): number[] {
 
     for (let i = 0; i < n; i++) {
         prefix[i] = (nums[i - 1] || 0) + (prefix[i - 1] || 0);
-    }
-
-    for (let i = n - 1; i >= 0; i--) {
-        suffix[i] = (nums[i + 1] || 0) + (suffix[i + 1] || 0);
+        suffix[n - 1 - i] = (nums[n - i] || 0) + (suffix[n - i] || 0);
     }
 
     for (let i = 0; i < n; i++) {
