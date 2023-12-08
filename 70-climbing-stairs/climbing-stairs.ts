@@ -1,4 +1,18 @@
 function climbStairs(n: number): number {
+    let one = 1;
+    let two = 1;
+
+    for (let i = 0; i < n - 1; i++) {
+        let temp = one;
+        one = one + two;
+        two = temp;
+    }
+    return one;
+}
+
+/*
+
+function climbStairs(n: number): number {
     const dp: number[] = [0, 1, 2];
 
     for (let i = 3; i <= n; i++) {
@@ -7,6 +21,8 @@ function climbStairs(n: number): number {
 
     return dp[n];
 }
+
+ */
 
 /*
 
