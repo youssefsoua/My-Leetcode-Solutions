@@ -1,36 +1,30 @@
 function numSpecial(mat: number[][]): number {
     const m: number = mat.length;
     const n: number = mat[0].length;
+    const rowCounts: number[] = new Array(m).fill(0);
+    const colCounts: number[] = new Array(n).fill(0);
     let count: number = 0;
 
     for (let i = 0; i < m; i++) {
-        let columnIdx: number = -1;
-
         for (let j = 0; j < n; j++) {
             if (mat[i][j] === 1) {
-                if (columnIdx === -1) {
-                    columnIdx = j;
-                } else {
-                    columnIdx = -1; // More than one '1' in the row, reset columnIdx
-                    break;
-                }
+                rowCounts[i]++;
+                colCounts[j]++;
             }
         }
+    }
 
-        if (columnIdx !== -1) {
-            let uniqueCount = 0;
-            for (let k = 0; k < m; k++) {
-                if (mat[k][columnIdx] === 1) {
-                    uniqueCount++;
-                    if (uniqueCount > 1) break;
-                }
+    for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+            if (mat[i][j] === 1 && rowCounts[i] === 1 && colCounts[j] === 1) {
+                count++;
             }
-            if (uniqueCount === 1) count++;
         }
     }
 
     return count;
 }
+
 
 /*
 
