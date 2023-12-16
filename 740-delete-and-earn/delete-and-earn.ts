@@ -18,10 +18,9 @@ function deleteAndEarn(nums: number[]): number {
     return Math.max(arr[0], arr[1] ?? 0);
 }
 
-
-
-
 /**
+//Recursive Solution:
+
 function deleteAndEarn(nums: number[]): number {
     if (nums.length === 0) return 0;
     let max = 0;
