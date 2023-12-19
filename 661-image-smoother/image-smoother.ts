@@ -1,4 +1,5 @@
 // This function takes a 2D array representing an image (img) and applies a smoothing filter to each pixel.
+
 function imageSmoother(img: number[][]): number[][] {
   // Define the 8 neighboring pixels relative to the current pixel.
   const filters: number[][] = [
