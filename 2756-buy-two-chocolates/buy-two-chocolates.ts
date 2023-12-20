@@ -1,16 +1,16 @@
 function buyChoco(prices: number[], money: number): number {
+    // Sort the Array in Increasing Order
     prices.sort((a, b) => a - b);
-    let count: number = 2;
-    let sum: number = 0;
 
-    for (let i = 0; i < prices.length; i++) {
-        if (count > 0 && prices[i] > money - sum) break;
+    // Minimum Cost
+    let minCost = prices[0] + prices[1];
 
-        count--;
-        sum += prices[i];
-
-        if (count === 0) return money - sum;
+    // We can buy chocolates only if we have enough money
+    if (minCost <= money) {
+        // Return the Amount of Money Left
+        return money - minCost;
+    } else {
+        // We cannot buy chocolates. Return the initial amount of money
+        return money;
     }
-
-    return money;
 }
