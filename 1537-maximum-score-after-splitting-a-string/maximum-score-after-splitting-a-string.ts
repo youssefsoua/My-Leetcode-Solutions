@@ -10,7 +10,7 @@ function maxScore(s: string): number {
         right += +char;
     }
 
-    // Iterate through the string, excluding the last two characters.
+    // Iterate through the string.
     for (let i = 0; i < s.length - 1; i++) {
         // Update the left and right counts based on the current character.
         if (s[i] === "0") left++;
