@@ -12,14 +12,12 @@ function uniquePaths(m: number, n: number): number {
     dp[0][j] = 1;
   }
 
-
   // Fill the rest of the table
   for (let i = 1; i < m; i++) {
     for (let j = 1; j < n; j++) {
       dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
     }
   }
-
 
   // The last cell contains the number of unique paths
   return dp[m - 1][n - 1];
@@ -29,12 +27,12 @@ function uniquePaths(m: number, n: number): number {
 m = 3 and n = 3
 
 Each cell represent the number of how many ways to reach it 
+
 [ 1, 1, 1 ]
 [ 1, 2, 3 ]
 [ 1, 3, 6 ]
 
-
- */
+*/
 
 /**
 function uniquePaths(
