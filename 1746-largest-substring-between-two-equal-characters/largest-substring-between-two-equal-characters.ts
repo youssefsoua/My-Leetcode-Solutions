@@ -7,7 +7,7 @@ function maxLengthBetweenEqualCharacters(s: string): number {
 
     // Iterate through each character in the string
     for (let i = 0; i < s.length; i++) {
-        // Retrieve the last index of the current character from the map
+        // Retrieve the first index of the current character from the map
         const index = indexes.get(s[i]);
 
         // If the character is found in the map, update the maximum length
