@@ -1,5 +1,5 @@
 function maxLengthBetweenEqualCharacters(s: string): number {
-    // Create a map to store the last index of each character
+    // Create a map to store the first index of each character
     const indexes = new Map<string, number>();
     
     // Initialize the maximum length variable
