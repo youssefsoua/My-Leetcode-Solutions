@@ -1,11 +1,17 @@
 function maxProduct(nums: number[]): number {
-    let max = nums[0], min = nums[0], result = nums[0];
-    for(let i = 1; i < nums.length; i++){
-        let tempMax = Math.max(nums[i], max * nums[i], min * nums[i]);
-        let tempMin = Math.min(nums[i], max * nums[i], min * nums[i]);
-        max = tempMax;
-        min = tempMin;
-        result = Math.max(result, max);
+    const n = nums.length;
+    let max = -Infinity;
+    let product = 1;
+    for(let i = 0; i < n; i++){
+        product *= nums[i];
+        max = Math.max(max, product);
+        if(product === 0) product = 1;
     }
-    return result;
+    product = 1;
+    for(let i = n-1; i >= 0; i--){
+        product *= nums[i];
+        max = Math.max(max, product);
+        if(product === 0) product = 1;
+    }
+    return max;
 };
