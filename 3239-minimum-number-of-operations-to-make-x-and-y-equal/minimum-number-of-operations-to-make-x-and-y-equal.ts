@@ -1,15 +1,41 @@
-var minimumOperationsToMakeEqual = function(x, y) {
-    
-    if(y >= x) return y - x;
-    
-    const arr = [x - y], mod11 = x % 11, mod5 = x % 5;
+function minimumOperationsToMakeEqual(x: number, y: number, memo = new Map<number, number>()): number {
+    // If the value is already computed, return it
+    if (memo.has(x)) return memo.get(x);
+    // If x is less than or equal to y, return the difference
+    if (x <= y) return y - x;
 
-    let ops = Math.min(mod11 + minimumOperationsToMakeEqual((x - mod11) / 11, y), 11 - mod11 + minimumOperationsToMakeEqual((x + 11 - mod11) / 11, y));
-    arr.push(ops + 1);
+    let result = Infinity;
+    const divisors = [11, 5];
 
-        
-    ops = Math.min(mod5 + minimumOperationsToMakeEqual((x - mod5) / 5, y), 5 - mod5 + minimumOperationsToMakeEqual((x + 5 - mod5) / 5, y));
-    arr.push(ops + 1);
-    
-    return Math.min(...arr) ;
-};
+    // Try subtracting 1 from x
+    result = Math.min(result, 1 + minimumOperationsToMakeEqual(x - 1, y, memo));
+
+    for (const divisor of divisors) {
+        if (x % divisor === 0) {
+            // If x is divisible by the divisor, try dividing x by the divisor
+            result = Math.min(result, 1 + minimumOperationsToMakeEqual(x / divisor, y, memo));
+        } else {
+            // If x is not divisible by the divisor, find the nearest multiple of the divisor
+            let [ops, val] = nearestMultiple(x, divisor);
+            result = Math.min(result, 1 + ops + minimumOperationsToMakeEqual((x + val) / divisor, y, memo));
+        }
+    }
+
+    // Store the computed value in the memo
+    memo.set(x, result);
+
+    return result;
+}
+
+function nearestMultiple(x: number, divisor: number): number[] {
+    let val: number = 0;
+    // Find the nearest multiple of the divisor
+    if (x % divisor >= divisor / 2) {
+        val = divisor - (x % divisor);
+    } else {
+        val = -x % divisor;
+    }
+    // The number of operations is the absolute value of val
+    let ops = Math.abs(val);
+    return [ops, val];
+}
