@@ -11,7 +11,6 @@ function climbStairs(n: number): number {
 }
 
 /*
-
 function climbStairs(n: number): number {
     const dp: number[] = [0, 1, 2];
 
@@ -21,10 +20,6 @@ function climbStairs(n: number): number {
 
     return dp[n];
 }
-
- */
-
-/*
 
 function climbStairs(n: number, cache: Record<number, number> = {}): number {
     if (cache[n] !== undefined) {
@@ -42,5 +37,4 @@ function climbStairs(n: number, cache: Record<number, number> = {}): number {
     cache[n] = climbStairs(n - 1, cache) + climbStairs(n - 2, cache);
     return cache[n];
 }
-
  */
