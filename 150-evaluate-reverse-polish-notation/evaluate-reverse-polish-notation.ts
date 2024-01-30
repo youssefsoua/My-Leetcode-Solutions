@@ -14,7 +14,6 @@ function evalRPN(tokens: string[]): number {
     return stack[0];
 }
 
-
 function applyOperator(operator: string, num1: number, num2: number): number {
     switch (operator) {
         case "+":
