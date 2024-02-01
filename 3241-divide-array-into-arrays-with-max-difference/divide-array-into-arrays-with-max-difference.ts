@@ -1,5 +1,18 @@
 function divideArray(nums: number[], k: number): number[][] {
     nums.sort((a, b) => a - b);
+    const ans: number[][] = [];
+    for (let i = 0; i < nums.length; i += 3) {
+        if (nums[i + 2] - nums[i] > k) {
+            return [];
+        }
+        ans.push([nums[i], nums[i + 1], nums[i + 2]]);
+    }
+    return ans;
+};
+
+/*
+function divideArray(nums: number[], k: number): number[][] {
+    nums.sort((a, b) => a - b);
     let possible = true;
     const result: number[][] = [];
     const n: number = nums.length / 3;
@@ -21,3 +34,5 @@ function divideArray(nums: number[], k: number): number[][] {
 
     return possible ? result : [];
 };
+
+*/
