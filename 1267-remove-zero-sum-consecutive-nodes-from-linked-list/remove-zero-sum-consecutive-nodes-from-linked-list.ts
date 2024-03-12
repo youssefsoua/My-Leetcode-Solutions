@@ -11,11 +11,11 @@
  */
 
 function removeZeroSumSublists(head: ListNode | null): ListNode | null {
-    let dummy: ListNode = new ListNode(0);
-    dummy.next = head;
+    let list: ListNode = new ListNode(0);
+    list.next = head;
     let sum: number = 0;
     let map: Map<number, ListNode> = new Map();
-    map.set(0, dummy);
+    map.set(0, list);
 
     while (head) {
         sum += head.val;
@@ -35,5 +35,5 @@ function removeZeroSumSublists(head: ListNode | null): ListNode | null {
         head = head.next;
     }
 
-    return dummy.next;
+    return list.next;
 }
