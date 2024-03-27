@@ -15,8 +15,8 @@ function numSubarrayProductLessThanK(nums: number[], k: number): number {
             start++;
         }
 
-        count += end - start + 1;
+        count += end - start;
     }
 
-    return count - nums.length;
+    return count;
 };
