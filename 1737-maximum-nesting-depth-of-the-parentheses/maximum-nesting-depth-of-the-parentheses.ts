@@ -7,10 +7,11 @@ function maxDepth(s: string): number {
             depth++;
             max = Math.max(max, depth);
         }
-        
+
         if (e === ")") {
             depth--;
         }
     }
+    
     return max;
 };
