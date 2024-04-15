@@ -29,20 +29,3 @@ function sumNumbers(root: TreeNode | null): number {
 
     return dfs(root, 0);
 }
-
-// function sumNumbers(root: TreeNode | null): number {
-//     const nums: number[] = [];
-
-//     const getNumbers = (root: TreeNode | null, num: string = ""): void => {
-//         if (root) {
-//             num += root.val;
-//             if (!root.left && !root.right) nums.push(+num);
-
-//             getNumbers(root.left, num);
-//             getNumbers(root.right, num);
-//         }
-//     };
-//     getNumbers(root);
-
-//     return nums.reduce((s, e) => s + e, 0);
-// }
