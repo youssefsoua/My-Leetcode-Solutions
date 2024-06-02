@@ -2,10 +2,7 @@
  Do not return anything, modify s in-place instead.
  */
 function reverseString(s: string[]): void {
-    let left: number = 0;
-    let right: number = s.length - 1;
-
-    while (left < right) {
-        [s[left++], s[right--]] = [s[right], s[left]];
+    for (let i = 0; i < s.length / 2; i++) {
+        [s[i], s[s.length - 1 - i]] = [s[s.length - 1 - i], s[i]];
     }
-}
+};
