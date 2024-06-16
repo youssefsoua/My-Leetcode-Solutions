@@ -1,37 +1,31 @@
 function findMaximizedCapital(k: number, w: number, profits: number[], capital: number[]): number {
-    // consider capital at hand first at every iteration
-    // get a list of projects you can do with that capital,
-    // pick most profitable project to do from that list.
+    // Max priority queue to store the profits of projects we can afford
+    const maxProfitQueue = new MaxPriorityQueue();
 
-    // Note: profit is not (profit[i]-capital[i]), it is just (profit[i])
+    // Combine the profits and capital into a single array of [capital, profit] pairs
+    const projects = capital.map((cap, idx) => [cap, profits[idx]]);
 
-    let queue = new MaxPriorityQueue();
-    
-    let combinedData: number[][] = capital.map((item, idx) => [item, profits[idx]]);
-    combinedData.sort((a,b) => a[0]-b[0]);
+    // Sort the projects based on the capital required
+    projects.sort((a, b) => a[0] - b[0]);
 
-    let currentCapital: number = w;
-    let currentIdx: number = 0;
+    let currentCapital = w;
+    let projectIndex = 0;
 
-    while(k > 0) {
-
-        while(currentIdx < combinedData.length && combinedData[currentIdx][0] <= currentCapital){
-            const [capital, profit] = combinedData[currentIdx];
-
-            queue.enqueue(profit);
-
-            currentIdx += 1;
+    for (let i = 0; i < k; i++) {
+        // Add all projects that can be started with the current capital to the max profit queue
+        while (projectIndex < projects.length && projects[projectIndex][0] <= currentCapital) {
+            maxProfitQueue.enqueue(projects[projectIndex][1]);
+            projectIndex++;
         }
 
-        if(queue.size() === 0){
+        // If there are no projects that can be started, return the current capital
+        if (maxProfitQueue.isEmpty()) {
             return currentCapital;
         }
 
-        const {element} = queue.dequeue();
-        currentCapital += element;
-
-        k-=1;
+        // Take the most profitable project available
+        currentCapital += maxProfitQueue.dequeue().element;
     }
 
     return currentCapital;
-};
+}
