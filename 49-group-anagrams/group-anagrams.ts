@@ -1,22 +1,21 @@
 function groupAnagrams(strs: string[]): string[][] {
-    const groups = new Map<string, string[]>();
-    
+    const map = new Map<string, string[]>();
+
     for (const str of strs) {
-        const chars: number[] = new Array(26).fill(0);
-        for (const char of str) {
-            chars[char.charCodeAt(0) - 97]++;
+
+        const counter = Array(26).fill(0);
+
+        for (const s of str) {
+            counter[s.charCodeAt(0) - 97]++;
         }
 
-        const key = chars.toString();
-        const exist = groups.get(key);
+        const key = counter.join("-");
 
-        if (exist !== undefined) {
-            exist.push(str);
-            groups.set(key, exist);
-        } else {
-            groups.set(key, [str]);
-        }
+        const exist = map.get(key);
+
+        if (exist) exist.push(str);
+        else map.set(key, [str]);
     }
 
-    return Array.from(groups.values());
-}
+    return Array.from(map.values());
+};
