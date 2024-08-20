@@ -11,9 +11,15 @@
  */
 
 function reverseList(head: ListNode | null): ListNode | null {
-    if(!head || !head.next) return head
-    let list = reverseList(head.next)
-    head.next.next = head
-    head.next = null
-    return list
+    let list = head;
+    let prev = null;
+    
+    while (list) {
+        let next = list.next;
+        list.next = prev;
+        prev = list;
+        list = next;
+    }
+
+    return prev;
 };
